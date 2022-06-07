@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ContentView: View{
+    
+    var emojis = ["🚗", "🚕", "🚎", "🚌", "🚚", "✈️", "🚘",
+    "🚝", "🚆", "🚁", "⛵️", "🚢", "🚀"]
+    
+    var emojiCount = 3
+    
     var body: some View{
+        
         HStack {
-            CartView()
-            CartView()
-            CartView()
-            CartView()
+            ForEach(emojis[0..<emojiCount], id: \.self, content: {
+                emoji in CartView(content: emoji)
+            })
         }
        .padding(.horizontal)
        .foregroundColor(.red)
@@ -21,6 +27,7 @@ struct ContentView: View{
 }
 
 struct CartView: View {
+    var content: String
     @State var isFaceUp: Bool = true
     
     var body: some View {
@@ -31,7 +38,7 @@ struct CartView: View {
             if isFaceUp {
                 shape.fill().foregroundColor(.white)
                 shape.stroke(lineWidth: 3)
-                Text("✈️").font((.largeTitle))
+                Text(content).font((.largeTitle))
             } else {
                 shape.fill()
             }
