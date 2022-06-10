@@ -12,16 +12,19 @@ struct ContentView: View{
     var emojis = ["🚗", "🚕", "🚎", "🚌", "🚚", "✈️", "🚘",
     "🚝", "🚆", "🚁", "⛵️", "🚢", "🚀"]
     
-   @State var emojiCount = 3
+   @State var emojiCount = 13
     
     
     var body: some View{
         
         VStack {
-            HStack {
+            ScrollView{
+                LazyVGrid (columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(emojis[0..<emojiCount], id: \.self, content: {
-                    emoji in CartView(content: emoji)
+                    emoji in CartView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                 })
+            }
+            .foregroundColor(.red)
             }
             
             Spacer()
@@ -36,7 +39,7 @@ struct ContentView: View{
             
         }
        .padding(.horizontal)
-       .foregroundColor(.red)
+       
     }
     
     var remove: some View {
@@ -72,7 +75,7 @@ struct CartView: View {
             
             if isFaceUp {
                 shape.fill().foregroundColor(.white)
-                shape.stroke(lineWidth: 3)
+                shape.strokeBorder(lineWidth: 3)
                 Text(content).font((.largeTitle))
             } else {
                 shape.fill()
