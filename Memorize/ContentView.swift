@@ -9,8 +9,14 @@ import SwiftUI
 
 struct ContentView: View{
     
-    var emojis = ["🚗", "🚕", "🚎", "🚌", "🚚", "✈️", "🚘",
+    var transport = ["🚗", "🚕", "🚎", "🚌", "🚚", "✈️", "🚘",
     "🚝", "🚆", "🚁", "⛵️", "🚢", "🚀"]
+    
+    var emojis = ["😀", "😃", "😄", "🥹","😅","😂", "🤣", "🥲", "☺️"
+                  , "😍", "🥰", "😘", "🤪", "😎", "😝"]
+    
+    var food = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🫐", "🥝", "🥥", "🥦", "🌶", "🥑", "🍆", "🧄"]
+    
     
    @State var emojiCount = 13
     
@@ -18,9 +24,10 @@ struct ContentView: View{
     var body: some View{
         
         VStack {
+            appName
             ScrollView{
                 LazyVGrid (columns: [GridItem(.adaptive(minimum: 65))]) {
-                ForEach(emojis[0..<emojiCount], id: \.self, content: {
+                ForEach(transport[0..<emojiCount], id: \.self, content: {
                     emoji in CartView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                 })
             }
@@ -30,9 +37,11 @@ struct ContentView: View{
             Spacer()
             
             HStack{
-                remove
+                transportTheme
                 Spacer()
-                add
+                emojisTheme
+                Spacer()
+                foodTheme
             }
             .font(.largeTitle)
             .padding(.horizontal)
@@ -40,6 +49,28 @@ struct ContentView: View{
         }
        .padding(.horizontal)
        
+    }
+    
+    var appName: some View{
+        Text("Memorize!").font(.largeTitle)
+    }
+    
+    var transportTheme: some View {
+        Button(action: {}, label: {
+            Text("🚘")
+        })
+    }
+    
+    var emojisTheme: some View {
+        Button(action: {}, label: {
+            Text("😆").font(.largeTitle)
+        })
+    }
+    
+    var foodTheme: some View{
+        Button(action: {}, label: {
+            Text("🍛")
+        })
     }
     
     var remove: some View {
@@ -54,7 +85,7 @@ struct ContentView: View{
     
     var add: some View {
         Button(action: {
-            if emojiCount < emojis.count {
+            if emojiCount < transport.count {
                 emojiCount += 1
             }
         }, label: {
