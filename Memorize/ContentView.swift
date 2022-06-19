@@ -72,32 +72,13 @@ struct ContentView: View{
             Text("🍛")
         })
     }
-    
-    var remove: some View {
-        Button(action: {
-            if emojiCount > 1 {
-                emojiCount -= 1
-            }
-        }, label: {
-            Image(systemName: "minus.circle")
-        })
-    }
-    
-    var add: some View {
-        Button(action: {
-            if emojiCount < transport.count {
-                emojiCount += 1
-            }
-        }, label: {
-            Image(systemName: "plus.circle")
-        })
-    }
 
 }
 
 struct CartView: View {
     var content: String
     @State var isFaceUp: Bool = true
+    @State var theme: Bool = true
     
     var body: some View {
         ZStack(content: {
@@ -112,6 +93,8 @@ struct CartView: View {
                 shape.fill()
             }
         })
+        
+        
         .onTapGesture{
             isFaceUp = !isFaceUp
         }
